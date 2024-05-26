@@ -150,4 +150,23 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.patch("/:id", async (req, res) => {
+  try {
+    const { value, error } = validateAdmin(req.body);
+    if (error) {
+      return res
+        .status(400)
+        .json({ state: false, msg: error.details[0].message, innerData: null });
+    }
+    value.phoneNumber = "+998" + value.phoneNumber;
+
+    const updatedAdmin = await Admins.findByIdAndUpdate(req.params.id, value);
+    res
+      .status(200)
+      .json({ state: true, msg: "Admin updated", innerData: updatedAdmin });
+  } catch {
+    res.json({ state: false, msg: "something went wrong", data: null });
+  }
+});
+
 module.exports = router;
