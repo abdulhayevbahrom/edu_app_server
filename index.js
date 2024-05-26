@@ -12,7 +12,7 @@ app.use(cors());
 mongoose
   .connect(process.env.DATABASE)
   .then(() => console.log("MongoDB is connected"))
-  .catch(() => console.log("MongoDB is not connected"));
+  .catch(() => console.log("MongoDB is NOT connected"));
 
 app.get("/", async (req, res) => {
   res.json("app is running");
