@@ -10,6 +10,10 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  minPrice: {
+    type: Number,
+    required: true,
+  },
   location: {
     type: String,
   },
@@ -35,6 +39,19 @@ const productSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  tg: {
+    type: String,
+    default: "",
+  },
+  fb: {
+    type: String,
+    default: "",
+  },
+  inst: {
+    type: String,
+    default: "",
+  },
+  locationIframe: { type: String, default: "" },
 });
 
 const Products = model("products", productSchema);
@@ -50,6 +67,11 @@ const validateProduct = (body) => {
     description: Joi.string(),
     date: Joi.string(),
     isActive: Joi.boolean(),
+    locationIframe: Joi.string(),
+    tg: Joi.string(),
+    fb: Joi.string(),
+    inst: Joi.string(),
+    minPrice: Joi.number(),
   });
   return schema.validate(body);
 };
